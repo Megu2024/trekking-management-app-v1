@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+
+{% block title %}
+Add Trek
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <div class="card shadow">
+
+        <div class="card-body">
+
+            <h2 class="text-center mb-4">
+                Add New Trek
+            </h2>
+
+            <form method="POST">
+
+                <div class="mb-3">
+                    <label>Trek Name</label>
+                    <input type="text" name="trek_name" class="form-control" required>
+                </div>
+
+                <div class="mb-3">
+                    <label>Location</label>
+                    <input type="text" name="location" class="form-control" required>
+                </div>
+
+                <div class="mb-3">
+                    <label>Difficulty</label>
+
+                    <select name="difficulty" class="form-control">
+
+                        <option>Easy</option>
+
+                        <option>Moderate</option>
+
+                        <option>Hard</option>
+
+                    </select>
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label>Duration (Days)</label>
+
+                    <input type="number" name="duration" class="form-control" required>
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label>Available Slots</label>
+
+                    <input type="number" name="available_slots" class="form-control" required>
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label>Status</label>
+
+                    <select name="status" class="form-control">
+
+                        <option>Pending</option>
+                        <option>Open</option>
+                        <option>Closed</option>
+
+                    </select>
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label>Start Date</label>
+
+                    <input type="date" name="start_date" class="form-control" required>
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label>End Date</label>
+
+                    <input type="date" name="end_date" class="form-control" required>
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label>Description</label>
+
+                    <textarea name="description" class="form-control" rows="4"></textarea>
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label>Assign Staff</label>
+
+                    <select name="assigned_staff" class="form-control">
+
+                        <option value="">
+                            No Staff
+                        </option>
+
+                        {% for member in staff %}
+
+                        <option value="{{ member.id }}">
+                            {{ member.name }}
+                        </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+                <button class="btn btn-success w-100">
+
+                    Add Trek
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
