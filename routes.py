@@ -215,8 +215,113 @@ def staff_dashboard():
         flash("Access Denied!")
         return redirect(url_for("main.login"))
 
-    return "<h1>Staff Dashboard</h1>"
+    assigned_treks = Trek.query.filter_by(
+        assigned_staff_id=current_user.id
+    ).all()
 
+    total_treks = len(assigned_treks)
+
+    total_trekkers = 0
+
+    for trek in assigned_treks:
+
+        total_trekkers += Booking.query.filter_by(
+            trek_id=trek.id
+        ).count()
+
+    return render_template(
+
+        "staff/dashboard.html",
+
+        assigned_treks=assigned_treks,
+
+        total_treks=total_treks,
+
+        total_trekkers=total_trekkers
+
+    )
+
+
+@main.route("/staff/profile", methods=["GET", "POST"])
+@login_required
+def staff_profile():
+
+    if current_user.role != "staff":
+        flash("Access Denied!")
+        return redirect(url_for("main.login"))
+
+    if request.method == "POST":
+
+        name = request.form["name"]
+        email = request.form["email"]
+        phone = request.form["phone"]
+        password = request.form["password"]
+
+        # Check if email already belongs to another user
+        existing_user = User.query.filter(
+            User.email == email,
+            User.id != current_user.id
+        ).first()
+
+        if existing_user:
+            flash("Email already exists!")
+            return redirect(url_for("main.staff_profile"))
+
+        current_user.name = name
+        current_user.email = email
+        current_user.phone = phone
+
+        if password:
+            current_user.password = generate_password_hash(password)
+
+        db.session.commit()
+
+        flash("Profile Updated Successfully!")
+        return redirect(url_for("main.staff_profile"))
+
+    return render_template("staff/profile.html")
+
+@main.route("/staff/edit_trek/<int:trek_id>", methods=["GET", "POST"])
+@login_required
+def edit_assigned_trek(trek_id):
+
+    if current_user.role != "staff":
+        flash("Access Denied!")
+        return redirect(url_for("main.login"))
+
+    trek = Trek.query.get_or_404(trek_id)
+
+    # Security Check
+    if trek.assigned_staff_id != current_user.id:
+        flash("You can only manage your assigned treks.")
+        return redirect(url_for("main.staff_dashboard"))
+
+    if request.method == "POST":
+
+        slots = int(request.form["available_slots"])
+
+        if slots < 0:
+            flash("Available slots cannot be negative.")
+            return redirect(
+                url_for(
+                    "main.edit_assigned_trek",
+                    trek_id=trek.id
+                )
+            )
+
+        trek.available_slots = slots
+        trek.status = request.form["status"]
+
+        db.session.commit()
+
+        flash("Trek Updated Successfully!")
+
+        return redirect(url_for("main.staff_dashboard"))
+
+    return render_template(
+        "staff/edit_trek.html",
+        trek=trek
+    )
 
 @main.route("/user")
 @login_required
