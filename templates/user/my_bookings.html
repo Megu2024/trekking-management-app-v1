@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% block title %}
+My Bookings
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <h2>My Bookings</h2>
+
+        <a href="{{ url_for('main.user_dashboard') }}" class="btn btn-secondary">
+
+            Dashboard
+
+        </a>
+
+    </div>
+
+    <table class="table table-bordered table-hover">
+
+        <thead class="table-dark">
+
+            <tr>
+
+                <th>Trek</th>
+
+                <th>Location</th>
+
+                <th>Booking Date</th>
+
+                <th>Booking Status</th>
+
+                <th>Trek Status</th>
+
+                <th>Payment</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            {% if bookings %}
+
+            {% for booking in bookings %}
+
+            <tr>
+
+                <td>{{ booking.trek.trek_name }}</td>
+
+                <td>{{ booking.trek.location }}</td>
+
+                <td>{{ booking.booking_date.strftime("%d-%m-%Y") }}</td>
+
+                <td>{{ booking.status }}</td>
+
+                <td>{{ booking.trek.status }}</td>
+
+                <td>{{ booking.payment_status }}</td>
+
+            </tr>
+
+            {% endfor %}
+
+            {% else %}
+
+            <tr>
+
+                <td colspan="6" class="text-center">
+
+                    No Bookings Yet
+
+                </td>
+
+            </tr>
+
+            {% endif %}
+
+        </tbody>
+
+    </table>
+
+</div>
+
+{% endblock %}

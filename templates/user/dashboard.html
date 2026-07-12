@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{% block title %}
+User Dashboard
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+
+        <div>
+
+            <h2>Welcome {{ current_user.name }}</h2>
+
+            <p class="text-muted mb-0">
+                Trekker Dashboard
+            </p>
+
+        </div>
+
+        <div>
+
+            <a href="{{ url_for('main.user_profile') }}" class="btn btn-primary">
+
+                My Profile
+
+            </a>
+
+            <a href="{{ url_for('main.logout') }}" class="btn btn-danger">
+
+                Logout
+
+            </a>
+
+        </div>
+
+    </div>
+
+    <div class="row mt-4 justify-content-between">
+
+        <div class="col-md-5">
+
+            <div class="card bg-primary text-white shadow">
+
+                <div class="card-body">
+
+                    <h4>Available Treks</h4>
+
+                    <h2>{{ available_treks }}</h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-5">
+
+            <div class="card bg-success text-white shadow">
+
+                <div class="card-body">
+
+                    <h4>My Bookings</h4>
+
+                    <h2>{{ total_bookings }}</h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <hr>
+
+    <div class="mt-4">
+
+        <a href="{{ url_for('main.view_available_treks') }}" class="btn btn-primary">
+
+            Browse Available Treks
+
+        </a>
+
+        <a href="{{ url_for('main.my_bookings') }}" class="btn btn-success">
+
+            My Bookings
+
+        </a>
+
+    </div>
+
+</div>
+
+{% endblock %}

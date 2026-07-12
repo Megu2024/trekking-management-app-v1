@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block title %}
+Participants
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <h2>Participants - {{ trek.trek_name }}</h2>
+
+        <a href="{{ url_for('main.staff_dashboard') }}" class="btn btn-secondary">
+
+            Back
+
+        </a>
+
+    </div>
+
+    <table class="table table-bordered table-hover">
+
+        <thead class="table-dark">
+
+            <tr>
+
+                <th>Name</th>
+
+                <th>Email</th>
+
+                <th>Phone</th>
+
+                <th>Booking Date</th>
+
+                <th>Booking Status</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            {% if bookings %}
+
+            {% for booking in bookings %}
+
+            <tr>
+
+                <td>{{ booking.user.name }}</td>
+
+                <td>{{ booking.user.email }}</td>
+
+                <td>{{ booking.user.phone }}</td>
+
+                <td>{{ booking.booking_date.strftime("%d-%m-%Y") }}</td>
+
+                <td>{{ booking.status }}</td>
+
+            </tr>
+
+            {% endfor %}
+
+            {% else %}
+
+            <tr>
+
+                <td colspan="5" class="text-center">
+
+                    No Participants Yet
+
+                </td>
+
+            </tr>
+
+            {% endif %}
+
+        </tbody>
+
+    </table>
+
+</div>
+
+{% endblock %}

@@ -94,7 +94,7 @@ Staff Dashboard
 
                 <th>Status</th>
 
-                <th>Action</th>
+                <th>Actions</th>
 
             </tr>
 
@@ -123,6 +123,12 @@ Staff Dashboard
                     <a href="{{ url_for('main.edit_assigned_trek', trek_id=trek.id) }}" class="btn btn-warning btn-sm">
 
                         Update
+
+                    </a>
+
+                    <a href="{{ url_for('main.view_participants', trek_id=trek.id) }}" class="btn btn-info btn-sm">
+
+                        Participants
 
                     </a>
 
