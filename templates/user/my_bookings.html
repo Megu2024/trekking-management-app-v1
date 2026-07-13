@@ -38,6 +38,8 @@ My Bookings
 
                 <th>Payment</th>
 
+                <th>Action</th>
+
             </tr>
 
         </thead>
@@ -62,6 +64,25 @@ My Bookings
 
                 <td>{{ booking.payment_status }}</td>
 
+                <td>
+
+                    {% if booking.status == "Booked" and booking.trek.status == "Open" %}
+
+                    <a href="{{ url_for('main.cancel_booking', booking_id=booking.id) }}" class="btn btn-danger btn-sm">
+
+                        Cancel
+
+                    </a>
+
+                    {% else %}
+
+                    -
+
+                    {% endif %}
+
+                </td>
+
+
             </tr>
 
             {% endfor %}
@@ -70,7 +91,7 @@ My Bookings
 
             <tr>
 
-                <td colspan="6" class="text-center">
+                <td colspan="7" class="text-center">
 
                     No Bookings Yet
 

@@ -1,23 +1,17 @@
 {% extends "base.html" %}
-
 {% block title %}
 Edit Trek
 {% endblock %}
-
 {% block content %}
 
 <div class="container mt-5">
 
     <div class="card shadow">
-
         <div class="card-body">
-
             <h2 class="text-center mb-4">
                 Edit Trek
             </h2>
-
             <form method="POST">
-
                 <div class="mb-3">
                     <label>Trek Name</label>
                     <input type="text" name="trek_name" class="form-control" value="{{ trek.trek_name }}" required>
@@ -30,119 +24,72 @@ Edit Trek
 
                 <div class="mb-3">
                     <label>Difficulty</label>
-
                     <select name="difficulty" class="form-control">
-
                         <option>Easy</option>
-
                         <option>Moderate</option>
-
                         <option>Hard</option>
-
                     </select>
-
                 </div>
 
                 <div class="mb-3">
-
                     <label>Duration (Days)</label>
-
                     <input type="number" name="duration" class="form-control" value="{{ trek.duration }}" required>
 
                 </div>
 
                 <div class="mb-3">
-
                     <label>Available Slots</label>
-
                     <input type="number" name="available_slots" class="form-control" value="{{ trek.available_slots }}"
                         required>
                 </div>
 
                 <div class="mb-3">
-
                     <label>Status</label>
-
                     <select name="status" class="form-control">
-
                         <option>Pending</option>
                         <option>Open</option>
                         <option>Closed</option>
-
                     </select>
-
                 </div>
 
                 <div class="mb-3">
-
                     <label>Start Date</label>
-
                     <input type="date" name="start_date" class="form-control" required
-                        value="{{ trek.start_date.strftime('%Y-%m-%d') if trek.start_date else '' }}">
+                        value="{{ trek.start_date.strftime('%Y-%m-%d') if trek.start_date else '' }}" </div>
+                    <div class="mb-3">
+                        <label>End Date</label>
+                        <input type="date" name="end_date" class="form-control" required
+                            value="{{ trek.end_date.strftime('%Y-%m-%d') if trek.end_date else '' }}">
+                    </div>
 
+                    <div class="mb-3">
+                        <label>Description</label>
+                        <textarea name="description" class="form-control" rows="4">{{ trek.description }}</textarea>
+                    </div>
 
-                </div>
+                    <div class="mb-3">
+                        <label class="form-label">
+                            Assign Trek Staff
+                        </label>
 
-                <div class="mb-3">
+                        <select name="assigned_staff" class="form-select">
+                            <option value="">
+                                -- No Staff Assigned --
+                            </option>
+                            {% for staff in staff_members %}
 
-                    <label>End Date</label>
+                            <option value="{{ staff.id }}" {% if trek.assigned_staff_id==staff.id %}selected{% endif %}>
+                                {{ staff.name }}
+                            </option>
+                            {% endfor %}
+                        </select>
+                    </div>
 
-                    <input type="date" name="end_date" class="form-control" required
-                        value="{{ trek.end_date.strftime('%Y-%m-%d') if trek.end_date else '' }}">
-
-
-                </div>
-
-                <div class="mb-3">
-
-                    <label>Description</label>
-
-                    <textarea name="description" class="form-control" rows="4">{{ trek.description }}</textarea>
-
-                </div>
-
-                <div class="mb-3">
-
-                    <label class="form-label">
-
-                        Assign Trek Staff
-
-                    </label>
-
-                    <select name="assigned_staff" class="form-select">
-
-                        <option value="">
-
-                            -- No Staff Assigned --
-
-                        </option>
-
-                        {% for staff in staff_members %}
-
-                        <option value="{{ staff.id }}" {% if trek.assigned_staff_id==staff.id %}selected{% endif %}>
-
-                            {{ staff.name }}
-
-                        </option>
-
-                        {% endfor %}
-
-                    </select>
-
-                </div>
-
-                <button class="btn btn-success w-100">
-
-                    Update Trek
-
-                </button>
-
+                    <button class="btn btn-success w-100">
+                        Update Trek
+                    </button>
             </form>
-
         </div>
-
     </div>
-
 </div>
-
 {% endblock %}

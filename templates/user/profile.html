@@ -1,68 +1,44 @@
 {% extends "base.html" %}
-
 {% block title %}
 My Profile
 {% endblock %}
-
 {% block content %}
 
 <div class="container mt-5">
-
     <h2 class="mb-4">
-
         Update Profile
-
     </h2>
 
     <form method="POST">
-
         <div class="mb-3">
-
             <label>Name</label>
-
             <input type="text" name="name" class="form-control" value="{{ current_user.name }}" required>
-
         </div>
 
         <div class="mb-3">
-
             <label>Email</label>
-
             <input type="email" name="email" class="form-control" value="{{ current_user.email }}" required>
-
         </div>
 
         <div class="mb-3">
-
             <label>Phone</label>
-
             <input type="text" name="phone" class="form-control" value="{{ current_user.phone }}" required>
-
         </div>
 
         <div class="mb-3">
-
             <label>New Password</label>
-
             <input type="password" name="password" class="form-control"
                 placeholder="Leave blank if you don't want to change">
-
         </div>
 
         <button class="btn btn-success">
-
             Update Profile
-
         </button>
 
         <a href="{{ url_for('main.user_dashboard') }}" class="btn btn-secondary">
-
             Back
-
         </a>
-
     </form>
 
 </div>
-
 {% endblock %}
