@@ -26,10 +26,10 @@ The application allows Admin, Trek Staff, and Users (Trekkers) to manage trekkin
 
 - Login
 - Dashboard with statistics
-- Add, edit and delete treks
+- Add, edit, and delete treks
 - Approve or reject staff registrations
 - Assign staff to treks
-- View users, staff and bookings
+- View users, staff, and bookings
 - Blacklist users or staff
 
 ### Trek Staff
@@ -121,13 +121,13 @@ http://127.0.0.1:5000/
 Email:
 
 ```
-admin@trek.com
+iitmadmin@trek.com
 ```
 
 Password:
 
 ```
-admin123
+iitmadmin@trek2026
 ```
 
 (Change these credentials if you modified `create_admin.py`.)
@@ -142,11 +142,23 @@ admin123
 
 ---
 
+## Development Notes
+
+### Issues Encountered
+
+- Prevented duplicate trek bookings by checking only active bookings.
+- Prevented overbooking by validating available slots before booking.
+- Fixed trek status resetting during trek editing.
+- Implemented role-based authentication using Flask-Login.
+- Added secure password hashing using Werkzeug Security.
+
+---
+
 ## Author
 
-**Name:** P N Megarajan(24F3003242)
+**Name:** P N Megarajan (24F3003242)
 
-**Course:** IIT Madras BS DS Degree Program
+**Course:** IIT Madras BS Degree Program
 
 **Project:** MAD-I Project
 
