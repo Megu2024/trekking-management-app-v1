@@ -1,0 +1,359 @@
+openapi: 3.0.0
+info:
+  title: Trekking Management Application API
+  description: API documentation for the Trekking Management Application
+  version: 1.0.0
+
+paths:
+  /:
+    get:
+      summary: Redirect user to the appropriate dashboard
+      responses:
+        "302":
+          description: Redirect to login or user dashboard
+
+  /register:
+    get:
+      summary: Display registration page
+      responses:
+        "200":
+          description: Registration page
+    post:
+      summary: Register a new user or trek staff
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                email:
+                  type: string
+                phone:
+                  type: string
+                role:
+                  type: string
+                password:
+                  type: string
+      responses:
+        "302":
+          description: Redirect to login page
+  /login:
+    get:
+      summary: Display login page
+      responses:
+        "200":
+          description: Login page
+    post:
+      summary: Authenticate user
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+      responses:
+        "302":
+          description: Redirect to dashboard
+
+  /logout:
+    get:
+      summary: Logout current user
+      responses:
+        "302":
+          description: Redirect to login page
+
+  /admin:
+    get:
+      summary: View Admin Dashboard
+      responses:
+        "200":
+          description: Admin dashboard
+
+  /admin/bookings:
+    get:
+      summary: View all trek bookings
+      responses:
+        "200":
+          description: Booking records
+
+  /admin/treks:
+    get:
+      summary: View and search treks
+      parameters:
+        - name: search
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Trek list
+
+  /admin/add_trek:
+    get:
+      summary: Display Add Trek page
+      responses:
+        "200":
+          description: Add trek form
+    post:
+      summary: Create a new trek
+      requestBody:
+        required: true
+      responses:
+        "302":
+          description: Redirect to admin dashboard
+
+  /admin/edit_trek/{trek_id}:
+    get:
+      summary: Display Edit Trek page
+      parameters:
+        - name: trek_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Trek details
+
+    post:
+      summary: Update trek information
+      parameters:
+        - name: trek_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "302":
+          description: Redirect after update
+
+  /admin/delete_trek/{trek_id}:
+    get:
+      summary: Delete a trek
+      parameters:
+        - name: trek_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "302":
+          description: Redirect after deletion
+
+  /admin/users:
+    get:
+      summary: Manage users
+      responses:
+        "200":
+          description: User list
+
+  /admin/staff:
+    get:
+      summary: Manage staff
+      responses:
+        "200":
+          description: Staff list
+
+  /admin/approve_staff/{user_id}:
+    get:
+      summary: Approve a staff account
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "302":
+          description: Redirect after approval
+
+  /admin/blacklist_user/{user_id}:
+    get:
+      summary: Blacklist a user
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "302":
+          description: Redirect after action
+
+  /admin/unblacklist_user/{user_id}:
+    get:
+      summary: Activate a user
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "302":
+          description: Redirect after activation
+
+  /admin/blacklist_staff/{user_id}:
+    get:
+      summary: Blacklist a staff member
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "302":
+          description: Redirect after action
+
+  /admin/unblacklist_staff/{user_id}:
+    get:
+      summary: Activate a staff member
+      parameters:
+        - name: user_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "302":
+          description: Redirect after activation
+
+  /staff:
+    get:
+      summary: View Staff Dashboard
+      responses:
+        "200":
+          description: Staff dashboard
+
+  /staff/profile:
+    get:
+      summary: Display staff profile
+      responses:
+        "200":
+          description: Staff profile
+
+    post:
+      summary: Update staff profile
+      responses:
+        "302":
+          description: Redirect after update
+
+  /staff/edit_trek/{trek_id}:
+    get:
+      summary: Display assigned trek details
+      parameters:
+        - name: trek_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Trek details
+
+    post:
+      summary: Update assigned trek
+      parameters:
+        - name: trek_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "302":
+          description: Redirect after update
+
+  /staff/participants/{trek_id}:
+    get:
+      summary: View trek participants
+      parameters:
+        - name: trek_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Participant list
+
+  /user:
+    get:
+      summary: View User Dashboard
+      responses:
+        "200":
+          description: User dashboard
+
+  /user/profile:
+    get:
+      summary: Display user profile
+      responses:
+        "200":
+          description: User profile
+
+    post:
+      summary: Update user profile
+      responses:
+        "302":
+          description: Redirect after update
+
+  /user/treks:
+    get:
+      summary: View available treks
+      parameters:
+        - name: search
+          in: query
+          schema:
+            type: string
+        - name: difficulty
+          in: query
+          schema:
+            type: string
+        - name: location
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Trek list
+
+  /user/book/{trek_id}:
+    get:
+      summary: Book a trek
+      parameters:
+        - name: trek_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "302":
+          description: Redirect after booking
+
+  /user/bookings:
+    get:
+      summary: View booking history
+      responses:
+        "200":
+          description: Booking history
+
+  /user/cancel_booking/{booking_id}:
+    get:
+      summary: Cancel a booking
+      parameters:
+        - name: booking_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "302":
+          description: Redirect after cancellation

@@ -4,7 +4,6 @@ Add Trek
 {% endblock %}
 
 {% block content %}
-
 <div class="container mt-5">
     <div class="card shadow">
         <div class="card-body">
@@ -16,7 +15,6 @@ Add Trek
                     <label>Trek Name</label>
                     <input type="text" name="trek_name" class="form-control" required>
                 </div>
-
                 <div class="mb-3">
                     <label>Location</label>
                     <input type="text" name="location" class="form-control" required>
@@ -29,6 +27,7 @@ Add Trek
                         <option>Moderate</option>
                         <option>Hard</option>
                     </select>
+
                 </div>
 
                 <div class="mb-3">
@@ -49,8 +48,8 @@ Add Trek
                         <option>Open</option>
                         <option>Closed</option>
                     </select>
-                </div>
 
+                </div>
                 <div class="mb-3">
                     <label>Start Date</label>
                     <input type="date" name="start_date" class="form-control" required>
@@ -66,7 +65,6 @@ Add Trek
                     <label>Description</label>
                     <textarea name="description" class="form-control" rows="4"></textarea>
                 </div>
-
                 <div class="mb-3">
                     <label>Assign Staff</label>
                     <select name="assigned_staff" class="form-control">
@@ -80,7 +78,6 @@ Add Trek
                         {% endfor %}
                     </select>
                 </div>
-
                 <button class="btn btn-success w-100">
                     Add Trek
                 </button>

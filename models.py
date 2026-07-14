@@ -20,12 +20,6 @@ class User(UserMixin,db.Model):
         lazy=True,
         cascade="all, delete-orphan"
     )
-    staff_profile = db.relationship(
-        "StaffProfile",
-        backref="user",
-        uselist=False,
-        cascade="all, delete-orphan"
-    )
     assigned_treks = db.relationship(
         "Trek",
         backref="assigned_staff",
@@ -52,7 +46,6 @@ class Trek(db.Model):
     end_date = db.Column(db.Date)
 
     description = db.Column(db.Text)
-    image = db.Column(db.String(255))
     bookings = db.relationship(
         "Booking",
         backref="trek",
@@ -86,15 +79,3 @@ class Booking(db.Model):
         default="Pending"
     )
 
-class StaffProfile(db.Model):
-    __tablename__ = "staff_profiles"
-    id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(
-        db.Integer,
-        db.ForeignKey("users.id"),
-        unique=True,
-        nullable=False
-    )
-    experience = db.Column(db.Integer)
-    emergency_contact = db.Column(db.String(20))
-    bio = db.Column(db.Text)

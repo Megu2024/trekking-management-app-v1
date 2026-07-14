@@ -7,7 +7,7 @@ from flask_login import (
     current_user
 )
 from database import db
-from models import User, Trek, Booking, StaffProfile
+from models import User, Trek, Booking
 from datetime import datetime
 from sqlalchemy import or_
 main = Blueprint("main", __name__)
@@ -96,9 +96,9 @@ def admin_dashboard():
         flash("Access Denied!")
         return redirect(url_for("main.login"))
     total_users = User.query.filter_by(role="user").count()
-    total_staff = User.query.filter_by(role="staff").count()
+    total_staff = User.query.filter_by(role="staff", is_approved=True).count()
     total_treks = Trek.query.count()
-    total_bookings = Booking.query.count()
+    total_bookings = Booking.query.filter_by(status="Booked").count()
     return render_template(
         "admin/dashboard.html",
         total_users=total_users,

@@ -12,8 +12,8 @@ with app.app_context():
             phone="9391146099",
             role="admin",
             is_approved=True,
-            is_blacklisted=False
-            password=generate_password_hash("admin123"),
+            is_blacklisted=False,
+            password=generate_password_hash("iitmadmin@trek2026"),
         )
         db.session.add(admin)
         db.session.commit()

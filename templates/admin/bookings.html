@@ -20,7 +20,6 @@ All Bookings
                 <th>Trek Status</th>
             </tr>
         </thead>
-
         <tbody>
             {% if bookings %}
             {% for booking in bookings %}
@@ -33,14 +32,12 @@ All Bookings
                 <td>{{ booking.payment_status }}</td>
                 <td>{{ booking.trek.status }}</td>
             </tr>
-
             {% endfor %}
             {% else %}
 
             <tr>
                 <td colspan="7" class="text-center">
                     No Booking Records
-
                 </td>
             </tr>
             {% endif %}
