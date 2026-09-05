@@ -1,5 +1,12 @@
 # Trekking Management Application
 
+## 🌐 Live Application
+
+**Live Demo:**  
+https://trekking-management-app-v1.vercel.app/
+
+---
+
 ## Project Description
 
 The Trekking Management Application is a Flask-based web application developed as part of the IIT Madras BS Degree Program (MAD-I Project).
