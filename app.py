@@ -4,7 +4,7 @@ from database import db
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "trekking_secret_key"
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.sqlite3"
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:////tmp/database.sqlite3"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 db.init_app(app)
 login_manager = LoginManager()
