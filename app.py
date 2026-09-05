@@ -23,3 +23,23 @@ with app.app_context():
 print(app.url_map)
 if __name__ == "__main__":
     app.run(debug=True)
+
+from werkzeug.security import generate_password_hash
+
+with app.app_context():
+    db.create_all()
+
+    admin = User.query.filter_by(email="admin@trek.com").first()
+
+    if not admin:
+        admin = User(
+            name="Administrator",
+            email="admin@trek.com",
+            phone="9391146099",
+            role="admin",
+            is_approved=True,
+            is_blacklisted=False,
+            password=generate_password_hash("iitmadmin@trek2026"),
+        )
+        db.session.add(admin)
+        db.session.commit()
